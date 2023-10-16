@@ -8,6 +8,7 @@ using namespace std;
 int main(){
     int choix;
     choix = 10;
+    source *s;
     while(choix > 0){
         system("cls");
         cout << "Choisissez une source : \n" << endl;
@@ -21,12 +22,34 @@ int main(){
 
         switch (choix)
         {
-        case /* constant-expression */:
-            /* code */
+        case 1:
+            s = new source_sin(1, 1, 1);
             break;
         
+        case 2:
+            s = new source_triangulaire(1, 1, 1);
+            break;
+
+        case 3:
+            s = new creneau(1, 1, 1);
+            break;
+
+        case 4:
+            s = new source_rectangulaire(1, 1, 1);
+            break;
+
+        case 5:
+            s = new source_echelon(1, 1, 1);
+            break;
+        
+        case 0:
+            return 0;
+
         default:
+            cout << "Choix invalide" << endl;
             break;
         }
+
     }
+    return 0;
 }
