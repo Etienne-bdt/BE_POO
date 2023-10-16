@@ -8,7 +8,7 @@ using namespace std;
 int main(){
     int choix;
     choix = 10;
-    source *s;
+    source* s;
     while(choix > 0){
         system("cls");
         cout << "Choisissez une source : \n" << endl;
@@ -23,23 +23,23 @@ int main(){
         switch (choix)
         {
         case 1:
-            s = new source_sin(1, 1, 1);
+            //s = new source_sin();
             break;
         
         case 2:
-            s = new source_triangulaire(1, 1, 1);
+            //s = new source_triangulaire(1, 1, 1);
             break;
 
         case 3:
-            s = new creneau(1, 1, 1,1);
+            //s = new creneau(1, 1, 1,1);
             break;
 
         case 4:
-            s = new source_rectangulaire(1, 1, 1);
+            //s = new source_rectangulaire(1, 1, 1);
             break;
 
         case 5:
-            s = new echelon(1, 1);
+            //s = new echelon(1, 1);
             break;
         
         case 0:
