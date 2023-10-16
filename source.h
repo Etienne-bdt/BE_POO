@@ -20,26 +20,30 @@ class source_aperiodique: public source {
 
 class source_sin: public source_periodique {
     public:
-        source_sin(float t, float a, float p);
+        source_sin(float a, float p, float f);
 };
 
 class source_triangulaire : public source_periodique{
     public:
-        source_triangulaire(float t, float a, float p);
+        source_triangulaire(float a, float p, float f);
 };
 
 class creneau : public source_periodique{
     public:
-        creneau(float t, float a, float p);
+        creneau(float a, float p, float f, float rc);
+    private:
+        float rapport_cyclique;
 };
 
 class source_rectangulaire: public source_aperiodique{
     public:
-        source_rectangulaire(float t, float a, float p);
+        source_rectangulaire(float a, float p, float d);
+    private:
+        float duree;
 };
 
 class echelon: public source_aperiodique{
     public:
-        echelon(float t, float a, float p);
+        echelon(float a, float p);
 };
 

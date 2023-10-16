@@ -31,7 +31,7 @@ int main(){
             break;
 
         case 3:
-            s = new creneau(1, 1, 1);
+            s = new creneau(1, 1, 1,1);
             break;
 
         case 4:
@@ -39,7 +39,7 @@ int main(){
             break;
 
         case 5:
-            s = new source_echelon(1, 1, 1);
+            s = new echelon(1, 1);
             break;
         
         case 0:

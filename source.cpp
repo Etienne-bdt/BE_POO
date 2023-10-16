@@ -20,7 +20,7 @@ class source {
 class source_periodique: public source {
     
     protected:
-        float periode;
+        float frequence;
 };
 
 class source_aperiodique: public source {
@@ -31,38 +31,45 @@ class source_aperiodique: public source {
 
 class source_sin: public source_periodique {
     public:
-        source_sin(float t, float a, float p);
+        source_sin(float a, float p, float f);
         float ve(float t){
-            return amplitude*sin(2*M_PI*t/periode + phase);
+            return amplitude*sin(2*M_PI*t*frequence + phase);
         };
     
 };
 
 class source_triangulaire : public source_periodique{
     public:
-        source_triangulaire(float t, float a, float p);
+        source_triangulaire(float a, float p, float f);
         float ve(float t);
 };
 
 class creneau : public source_periodique{
     public:
-        creneau(float t, float a, float p);
-        float ve(float t);
-    protected:
-        float largeur;
-};
-
-class source_rectangulaire: public source_aperiodique{
-    public:
-        source_rectangulaire(float t, float a, float p);
+        creneau(float a, float p, float f, float rc);
         float ve(float t);
     protected:
         float rapport_cyclique;
 };
 
+class source_rectangulaire: public source_aperiodique{
+    public:
+        source_rectangulaire(float a, float p, float d);
+        float ve(float t){
+            if( t>phase && t<phase+duree){
+                return amplitude;
+            }
+            else{
+                return 0;
+            }
+        };
+    private:
+        float duree;
+};
+
 class echelon: public source_aperiodique{
     public:
-        echelon(float t, float a, float p);
+        echelon(float a, float p);
         float ve(float t){
             if(t > phase){
                 return amplitude;
