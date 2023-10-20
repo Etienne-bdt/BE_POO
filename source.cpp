@@ -1,81 +1,84 @@
-#include <iostream>
-#include <string>
 #include <stdio.h>
 #include <math.h>
-
+#include <iostream>
+#include <string>
+#include "source.h"
 using namespace std;
 
-class source {
-    public:
-        source();
-        virtual float ve(float t){
-            return;
-        };    
-    protected:
-        float tension;
-        float amplitude;
-        float phase;
+float source::ve(float t){
+    return 0;
 };
 
-class source_periodique: public source {
-    
-    protected:
-        float frequence;
+source::source(){
+    return;
 };
 
-class source_aperiodique: public source {
-    
-    protected:
-        float duree;
+source_sin::source_sin(float f, float a, float p){
+    amplitude = a;
+    phase = p;
+    frequence = f;
 };
 
-class source_sin: public source_periodique {
-    public:
-        source_sin(float a, float p, float f);
-        float ve(float t){
-            return amplitude*sin(2*M_PI*t*frequence + phase);
-        };
-    
+source_periodique::source_periodique(){
+    amplitude =0;
+    frequence = 0;
+    phase = 0;
 };
 
-class source_triangulaire : public source_periodique{
-    public:
-        source_triangulaire(float a, float p, float f);
-        float ve(float t);
+source_periodique::source_periodique(float f, float a, float p){
+    amplitude = a;
+    phase=p;
+    frequence=f;
 };
 
-class creneau : public source_periodique{
-    public:
-        creneau(float a, float p, float f, float rc);
-        float ve(float t);
-    protected:
-        float rapport_cyclique;
+source_aperiodique::source_aperiodique(){
+    return;
 };
 
-class source_rectangulaire: public source_aperiodique{
-    public:
-        source_rectangulaire(float a, float p, float d);
-        float ve(float t){
-            if( t>phase && t<phase+duree){
-                return amplitude;
-            }
-            else{
-                return 0;
-            }
-        };
-    private:
-        float duree;
+source_rectangulaire::source_rectangulaire(float a, float p, float d){
+    amplitude = a;
+    phase = p;
+    duree = d;
 };
 
-class echelon: public source_aperiodique{
-    public:
-        echelon(float a, float p);
-        float ve(float t){
-            if(t > phase){
-                return amplitude;
-            }
-            else{
-                return 0;
-            }
-        };
+source_triangulaire::source_triangulaire(float a,float p, float f){
+    amplitude = a;
+    phase = p;
+    frequence = f;
 };
+
+echelon::echelon(float a, float p){
+    amplitude =a;
+    phase = p;
+};
+
+creneau::creneau(float a, float p, float f, float rc){
+    amplitude = a;
+    frequence = f;
+    phase = p;
+    rapport_cyclique = rc;
+};
+float source_sin::ve(float t){
+    return amplitude*sin(2*M_PI*t*frequence + phase);
+};
+
+float source_rectangulaire::ve(float t){
+    if(t>phase && t < phase+duree){
+        return amplitude;
+    }
+    else{
+        return 0;
+    }
+};
+
+float echelon::ve(float t){
+    if(t>phase){
+        return amplitude;
+    }
+    else{
+        return 0;
+    }
+};
+
+
+
