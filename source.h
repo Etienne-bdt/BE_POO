@@ -3,11 +3,10 @@
 #include <stdio.h>
 #include <math.h>
 
-class source
-{
-public:
-    source();
-    virtual float ve(float t);
+class source{
+    public:
+        source();
+        virtual float ve(float t);
 };
 
 class source_periodique: public source {
