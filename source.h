@@ -38,7 +38,7 @@ public:
 class source_triangulaire : public source_periodique{
 public:
     source_triangulaire(float a, float p, float f);
-    //float ve(float t);
+    float ve(float t);
 private:
     float amplitude;
     float phase;
@@ -48,7 +48,7 @@ private:
 class creneau : public source_periodique{
 public:
     creneau(float a, float p, float f, float rc);
-    //float ve(float t);
+    float ve(float t);
 private:
     float amplitude;
     float phase;

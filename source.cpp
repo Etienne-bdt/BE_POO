@@ -80,5 +80,31 @@ float echelon::ve(float t){
     }
 };
 
+float creneau::ve(float t){
+    float t1 = phase + rapport_cyclique/frequence;
+    float tr = fmod(t,1/frequence);
 
+    if(tr>phase && tr<t1){
+        return amplitude;
+    }
+    else{
+        return 0;
+    }
+}
 
+float source_triangulaire::ve(float t){
+    float t1 = phase + 1/(2*frequence);
+    float t2 = phase + 1/frequence;
+    float tr = fmod(t,1/frequence);
+    float pr = fmod(phase, 1/frequence);
+    float coeff_dir = 2*amplitude/(1/frequence);
+    if(tr>phase && tr<t1){
+        return coeff_dir*tr + amplitude*2*pr;
+    }
+    else if(tr>t1&&tr<t2){
+        return -coeff_dir*tr + amplitude*2*pr;
+    }
+    else{
+        return 0;
+    }
+}

@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <math.h>
+#include "source.h"
 using namespace std;
 
-int main()
-{
+int main(){
+    source *s;
+    s = new source_triangulaire(2,0,5);
 FILE * fich;
 int npas=100;
 float t,dt=1./float(npas);
@@ -11,7 +13,7 @@ fich=fopen("ve","wt");
 for(int i=0;i<npas+1;i++)
 {
 t=float(i)*3.141519265*dt;
-fprintf(fich,"%f %f \n",t,sin(2*t));
+fprintf(fich,"%f %f \n",t,s->ve(t));
 }
 fclose(fich);
 return 0;
