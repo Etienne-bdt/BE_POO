@@ -99,10 +99,10 @@ float source_triangulaire::ve(float t){
     float pr = fmod(phase, 1/frequence);
     float coeff_dir = 2*amplitude/(1/frequence);
     if(tr>phase && tr<t1){
-        return coeff_dir*tr + amplitude*2*pr;
+        return coeff_dir*(tr);
     }
     else if(tr>t1&&tr<t2){
-        return -coeff_dir*tr + amplitude*2*pr;
+        return -coeff_dir*(tr) + 2*amplitude;
     }
     else{
         return 0;

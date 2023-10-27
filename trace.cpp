@@ -5,9 +5,9 @@ using namespace std;
 
 int main(){
     source *s;
-    s = new source_triangulaire(2,0,5);
+    s = new source_triangulaire(1,0,1);
 FILE * fich;
-int npas=100;
+int npas=1000;
 float t,dt=1./float(npas);
 fich=fopen("ve","wt");
 for(int i=0;i<npas+1;i++)
