@@ -8,16 +8,16 @@ class circuits {
     public :
         circuits();
         source *s;
-        virtual void resolution() = 0;
-        virtual void f() = 0;
+        virtual void resolution(int npas, float tfin);
+        virtual float f(float t, float vs);
 };
 
 class prem_ordre : public circuits{
     protected: float C; 
     public:
         prem_ordre();
-        virtual void resolution() = 0;
-        virtual void f()=0;
+        virtual void resolution(int npas, float tfin);
+        virtual float f(float t, float vs);
 };
 
 class circuit_A : public prem_ordre{

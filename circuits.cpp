@@ -74,12 +74,26 @@ void circuit_B::resolution(int npas, float tfin){
     fclose(fich);
 };
 
+void circuits::resolution(int npas, float tfin){
+    return;
+};
+float circuits::f(float t, float vs){
+    return 0;
+};
+
+void prem_ordre::resolution(int npas, float tfin){
+    return;
+};
+
+float prem_ordre::f(float t, float vs){
+    return 0;
+};
 sec_ordre::sec_ordre(){
     float res,cap,bob;
     R = res;
     L = bob;
     C = cap;
-}
+};
 
 circuit_C::circuit_C(float res, float cap, float bob){
     R = res;
@@ -88,10 +102,10 @@ circuit_C::circuit_C(float res, float cap, float bob){
 };
 
 
+
 float circuit_C::f(float t, float vs){
     return 0;
 };
-
 void circuit_C::resolution(int npas, float tfin){
     float t,U,Uf,V,Vf = 0;
     float h = tfin/float(npas);
