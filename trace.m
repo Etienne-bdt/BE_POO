@@ -1,5 +1,5 @@
 load ve
-plot(ve(:,1),vs(:,2),'r')
+plot(ve(:,1),ve(:,2),'r')
 legend('ve')
 xlabel('t (s)')
 ylabel('ve (V)')
