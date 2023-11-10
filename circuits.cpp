@@ -115,9 +115,7 @@ void circuit_C::resolution(int npas, float tfin){
     fprintf(fich,"%f %f %f\n",t,s->ve(t),U);
     for (t; t < tfin; t+=h)
     {
-        Vf = h*f(t,V) + vs;
-        vs = vsf;
-        fprintf(fich,"%f %f %f\n",t,s->ve(t),vs);
+        
     }
     fclose(fich);*/
 };
