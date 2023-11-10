@@ -91,7 +91,7 @@ circuit_C::circuit_C(float res, float cap, float bob){
 float circuit_C::f(float t, float vs){
 
 };
-/*
+
 void circuit_C::resolution(int npas, float tfin){
     float t,U,Uf,V,Vf = 0;
     float h = tfin/float(npas);
@@ -100,15 +100,23 @@ void circuit_C::resolution(int npas, float tfin){
     fprintf(fich,"%f %f %f\n",t,s->ve(t),U);
     for (t; t < tfin; t+=h)
     {
-        Vf = h*f(t,vs) + vs;
+        Vf = h*f(t,V) + vs;
         vs = vsf;
         fprintf(fich,"%f %f %f\n",t,s->ve(t),vs);
     }
     fclose(fich);
 };
-*/
+
 circuit_D::circuit_D(float res, float cap, float bob){
     R = res;
     L = bob;
     C = cap;
 };
+
+float circuit_D::f(float t, float vs){
+    return 0;
+}
+
+void circuit_D::resolution(int npas, float tfin){
+    return;
+}
