@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "source.h"
+#include "trace.h"
 using namespace std;
 
 int main(){
@@ -27,19 +28,19 @@ int main(){
             break;
         
         case 2:
-            //s = new source_triangulaire(1, 1, 1);
+            s = new source_triangulaire(1, 0, 1);
             break;
 
         case 3:
-            //s = new creneau(1, 1, 1,1);
+            s = new creneau(1, 1, 1,1);
             break;
 
         case 4:
-            //s = new source_rectangulaire(1, 1, 1);
+            s = new source_rectangulaire(1, 1, 1);
             break;
 
         case 5:
-            //s = new echelon(1, 1);
+            s = new echelon(1, 1);
             break;
         
         case 0:
@@ -50,14 +51,33 @@ int main(){
             cout << "Choix invalide" << endl;
             break;
         }
-        string x;
-        cout<<endl;
-        float v;
-        v = s->ve(0);
-        cout<<v<<endl;
-        cin>>x;
-
+        choix_action(s);
+        choix = -1;
     }
+    
     delete(s);
     return 0;
+}
+
+void choix_action(source *s){
+    int choix;
+    choix = 10;
+    while(choix > 0){
+        system("clear");
+        cout << "Choisissez une action : \n" << endl;
+        cout << "1. Tracer" << endl;
+        cout << "0. Quitter" << endl;
+        cin >> choix;
+        switch (choix)
+        {
+        case 1:
+            trace(s);
+            break;
+    
+        case 0:
+            return;
+        default:
+            break;
+        }
+}
 }

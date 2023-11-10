@@ -3,9 +3,7 @@
 #include "source.h"
 using namespace std;
 
-int main(){
-    source *s;
-    s = new source_triangulaire(1,0,1);
+int trace(source *s){
 FILE * fich;
 int npas=1000;
 float t,dt=1./float(npas);
