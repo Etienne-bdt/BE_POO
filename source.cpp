@@ -93,16 +93,16 @@ float creneau::ve(float t){
 }
 
 float source_triangulaire::ve(float t){
-    float t1 = phase + 1/(2*frequence);
-    float t2 = phase + 1/frequence;
-    float tr = fmod(t,1/frequence);
-    float pr = fmod(phase, 1/frequence);
+    float pt = 1/(frequence*2*M_PI);
+    float t1 = 1/(2*frequence);
+    float t2 = 1/frequence;
+    float tr = fmod(t-pt,1/frequence);
     float coeff_dir = 2*amplitude/(1/frequence);
-    if(tr>phase && tr<t1){
-        return coeff_dir*(tr) + 2*amplitude*phase*frequence;
+    if(tr>0 && tr<t1){
+        return coeff_dir*(tr) + 2*amplitude*pt*frequence;
     }
     else if(tr>t1&&tr<t2){
-        return -coeff_dir*(tr) + 2*amplitude-2*amplitude*phase*frequence;
+        return -coeff_dir*(tr) + 2*amplitude-2*amplitude*pt*frequence;
     }
     else{
         return 0;

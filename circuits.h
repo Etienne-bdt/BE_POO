@@ -38,3 +38,11 @@ class circuit_B : public prem_ordre{
         float f(float t, float vs);
         void resolution(int npas, float tfin);
 };
+
+class sec_ordre : public circuits{
+    private: 
+        float R;
+        float C;
+        float L;
+
+};

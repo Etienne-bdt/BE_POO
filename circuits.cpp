@@ -11,6 +11,11 @@ circuits::circuits(){
     s = source;
 };
 
+prem_ordre::prem_ordre(){
+    float Cond;
+    C = Cond;
+};
+
 circuit_A::circuit_A(source *source, float res, float cond){
     s = source;
     R=res;
@@ -64,3 +69,4 @@ void circuit_B::resolution(int npas, float tfin){
     }
     fclose(fich);
 };
+
