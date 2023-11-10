@@ -89,7 +89,7 @@ circuit_C::circuit_C(float res, float cap, float bob){
 
 
 float circuit_C::f(float t, float vs){
-
+    return 0;
 };
 
 void circuit_C::resolution(int npas, float tfin){
@@ -100,9 +100,7 @@ void circuit_C::resolution(int npas, float tfin){
     fprintf(fich,"%f %f %f\n",t,s->ve(t),U);
     for (t; t < tfin; t+=h)
     {
-        Vf = h*f(t,V) + vs;
-        vs = vsf;
-        fprintf(fich,"%f %f %f\n",t,s->ve(t),vs);
+        
     }
     fclose(fich);
 };
