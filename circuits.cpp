@@ -70,3 +70,17 @@ void circuit_B::resolution(int npas, float tfin){
     fclose(fich);
 };
 
+void circuits::resolution(int npas, float tfin){
+    return;
+};
+float circuits::f(float t, float vs){
+    return 0;
+};
+
+void prem_ordre::resolution(int npas, float tfin){
+    return;
+};
+
+float prem_ordre::f(float t, float vs){
+    return 0;
+};

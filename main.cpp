@@ -4,6 +4,7 @@
 #include <string>
 #include "source.h"
 #include "trace.h"
+#include "circuits.h"
 using namespace std;
 
 int main(){
@@ -28,7 +29,7 @@ int main(){
             break;
         
         case 2:
-            s = new source_triangulaire(1, 0.2 , 1);
+            s = new source_triangulaire(1, 1 , 1);
             break;
 
         case 3:
@@ -73,7 +74,18 @@ int main(){
             break;
         }
 }
-
+    float R;
+    float C;
+    circuits *circuit;
+    cout << "valeur R"<<endl;
+    cin>> R;
+    cout << "valeur C"<<endl;
+    cin>> C;
+    circuit = new circuit_A(s,R,C);
+    int npas;
+    float tfin;
+    circuit->resolution(npas, tfin);
+    
     delete(s);
     return 0;
 }
