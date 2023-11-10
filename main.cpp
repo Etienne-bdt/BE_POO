@@ -28,7 +28,7 @@ int main(){
             break;
         
         case 2:
-            s = new source_triangulaire(1, 0.2 , 1);
+            s = new source_triangulaire(1, 2 , 1);
             break;
 
         case 3:
