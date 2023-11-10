@@ -107,7 +107,8 @@ float circuit_C::f(float t, float vs){
     return 0;
 };
 void circuit_C::resolution(int npas, float tfin){
-    float t,U,Uf,V,Vf = 0;
+    return;
+    /*float t,U,Uf,V,Vf = 0;
     float h = tfin/float(npas);
     FILE * fich;
     fich=fopen("vs","wt");
@@ -118,7 +119,7 @@ void circuit_C::resolution(int npas, float tfin){
         vs = vsf;
         fprintf(fich,"%f %f %f\n",t,s->ve(t),vs);
     }
-    fclose(fich);
+    fclose(fich);*/
 };
 
 circuit_D::circuit_D(float res, float cap, float bob){

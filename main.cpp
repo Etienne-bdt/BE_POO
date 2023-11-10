@@ -37,7 +37,7 @@ int main(){
             break;
 
         case 4:
-            s = new source_rectangulaire(1, 1, 1);
+            s = new source_rectangulaire(1, 1, 3);
             break;
 
         case 5:
@@ -74,18 +74,48 @@ int main(){
             break;
         }
 }
-    float R;
+    choix =10;
+
+    float R1;
+    float R2;
     float C;
+    float VBE;
     circuits *circuit;
-    cout << "valeur R"<<endl;
-    cin>> R;
-    cout << "valeur C"<<endl;
-    cin>> C;
-    circuit = new circuit_A(s,R,C);
-    int npas;
-    float tfin;
-    circuit->resolution(npas, tfin);
+    while (choix>0){
+        cout << "Choisissez un type de circuit : \n" << endl;
+        cout << "1. Type A" << endl;
+        cout << "2. Type B" << endl;
+        cout << "0. Quitter" << endl;
+        cin>>choix;
     
+    switch (choix)
+    {
+    case 1 :
+        cout << "valeur R1"<<endl;
+        cin>> R1;
+        cout << "valeur C"<<endl;
+        cin>> C;
+        circuit = new circuit_A(s,R1,C);
+        break;
+    case 2 :
+        cout << "valeur R1"<<endl;
+        cin>> R1;
+        cout << "valeur R2"<<endl;
+        cin>> R2;
+        cout << "valeur C"<<endl;
+        cin>> C;
+        cout << "valeur VBE"<<endl;
+        cin>> VBE;
+        circuit = new circuit_B(s, R1, R2, C);
+        break;
+    default : 
+        break;
+    }
+    }
+    int npas = 10000;
+    float tfin = 15;
+    circuit->resolution(npas, tfin);
+       
     delete(s);
     return 0;
 }
