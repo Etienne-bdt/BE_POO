@@ -28,7 +28,7 @@ int main(){
             break;
         
         case 2:
-            s = new source_triangulaire(1, 0, 1);
+            s = new source_triangulaire(1, 0.2 , 1);
             break;
 
         case 3:
@@ -51,16 +51,9 @@ int main(){
             cout << "Choix invalide" << endl;
             break;
         }
-        choix_action(s);
         choix = -1;
     }
     
-    delete(s);
-    return 0;
-}
-
-void choix_action(source *s){
-    int choix;
     choix = 10;
     while(choix > 0){
         system("clear");
@@ -75,9 +68,12 @@ void choix_action(source *s){
             break;
     
         case 0:
-            return;
+            break;
         default:
             break;
         }
 }
+
+    delete(s);
+    return 0;
 }
