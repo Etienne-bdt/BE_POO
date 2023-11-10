@@ -40,9 +40,25 @@ class circuit_B : public prem_ordre{
 };
 
 class sec_ordre : public circuits{
-    private: 
+    protected: 
         float R;
         float C;
         float L;
+    public:
+        sec_ordre();
+        virtual void resolution(int npas,float tfin);
+        virtual float f(float t, float vs);
+};
 
+class circuit_C : public sec_ordre{
+    public : 
+        circuit_C(float res, float cap, float bob);
+        void resolution(int npas, float tfin);
+        float f(float t, float vs);
+};
+class circuit_D : public sec_ordre{
+    public : 
+        circuit_D(float res, float cap, float bob);
+        void resolution(int npas, float tfin);
+        float f(float t, float vs);
 };

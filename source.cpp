@@ -110,7 +110,7 @@ float triangle(float t, float amplitude, float frequence){
 
 float source_triangulaire::ve(float t){
     float pt = fmod(phase/(frequence*2*M_PI),1/frequence);
-    if(t>0){
+    if(t>=0){
         return triangle(t+pt,amplitude,frequence);
     }
     else{
