@@ -46,19 +46,19 @@ class sec_ordre : public circuits{
         float L;
     public:
         sec_ordre();
-        virtual void resolution(int npas,float tfin);
-        virtual float f(float t, float vs);
+        
 };
 
 class circuit_C : public sec_ordre{
     public : 
-        circuit_C(float res, float cap, float bob);
+        circuit_C(source *source, float res, float cap, float bob);
         void resolution(int npas, float tfin);
-        float f(float t, float vs);
+        float F(float t, float vs, float vsp);
 };
+
 class circuit_D : public sec_ordre{
     public : 
-        circuit_D(float res, float cap, float bob);
+        circuit_D(source *source,float res, float cap, float bob);
         void resolution(int npas, float tfin);
-        float f(float t, float vs);
+        float F(float t, float vs, float vsp, float h);
 };

@@ -52,9 +52,9 @@ circuit_B::circuit_B(source *source, float res1, float res2, float cond){
 
 float circuit_B::f(float t,float vs){
     if (s->ve(t)>VBE){
-        (s->ve(t)-VBE)/(R1*C) - ((1/(R1*C)) + (1/(R2*C)))*vs;
+        return (s->ve(t)-VBE)/(R1*C) - ((1/(R1*C)) + (1/(R2*C)))*vs;
     }else{
-        -vs/(R2*C);
+        return -vs/(R2*C);
     }
 };
 
@@ -88,48 +88,59 @@ void prem_ordre::resolution(int npas, float tfin){
 float prem_ordre::f(float t, float vs){
     return 0;
 };
+
 sec_ordre::sec_ordre(){
-    float res,cap,bob;
+    float Cond;
+    C = Cond;
+};
+
+circuit_C::circuit_C(source *source,float res, float cap, float bob){
+    s= source;
     R = res;
     L = bob;
     C = cap;
 };
 
-circuit_C::circuit_C(float res, float cap, float bob){
-    R = res;
-    L = bob;
-    C = cap;
+float circuit_C::F(float t, float vs, float vsp){
+    return -(R/L)*vsp + ((vs-s->ve(t))/(L*C));
 };
 
-
-
-float circuit_C::f(float t, float vs){
-    return 0;
-};
 void circuit_C::resolution(int npas, float tfin){
-    return;
-    /*float t,U,Uf,V,Vf = 0;
+    float t,U,Uf,V,Vf = 0;
     float h = tfin/float(npas);
     FILE * fich;
     fich=fopen("vs","wt");
     fprintf(fich,"%f %f %f\n",t,s->ve(t),U);
     for (t; t < tfin; t+=h)
     {
-        
+        Vf = h*F(t,U,V)+V;
+        Uf = h*V+U;   
     }
-    fclose(fich);*/
+    fclose(fich);
 };
 
-circuit_D::circuit_D(float res, float cap, float bob){
+circuit_D::circuit_D(source *source,float res, float cap, float bob){
+    s = source;
     R = res;
     L = bob;
     C = cap;
 };
 
-float circuit_D::f(float t, float vs){
-    return 0;
-}
+float circuit_D::F(float t, float vs, float vsp,float h){
+    float vep = (s->ve(t+h)-s->ve(t))/h;
+    return -vs/(L*C) + (vep-vsp)/(R*C);
+};
 
 void circuit_D::resolution(int npas, float tfin){
-    return;
-}
+    float t,U,Uf,V,Vf = 0;
+    float h = tfin/float(npas);
+    FILE * fich;
+    fich=fopen("vs","wt");
+    fprintf(fich,"%f %f %f\n",t,s->ve(t),U);
+    for (t; t < tfin; t+=h)
+    {
+        Vf = h*F(t,U,V,h)+V;
+        Uf = h*V+U;
+    }
+    fclose(fich);
+};

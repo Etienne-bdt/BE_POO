@@ -2,8 +2,8 @@
 #include <math.h>
 #include <iostream>
 #include <string>
-#include "source.h"
 #include "trace.h"
+#include "source.h"
 #include "circuits.h"
 using namespace std;
 
@@ -54,50 +54,36 @@ int main(){
         }
         choix = -1;
     }
-    
-    choix = 10;
-    while(choix > 0){
-        system("clear");
-        cout << "Choisissez une action : \n" << endl;
-        cout << "1. Tracer" << endl;
-        cout << "0. Quitter" << endl;
-        cin >> choix;
-        switch (choix)
-        {
-        case 1:
-            trace(s);
-            break;
-    
-        case 0:
-            break;
-        default:
-            break;
-        }
-}
-    choix =10;
 
-    float R1;
-    float R2;
-    float C;
-    float VBE;
+    choix =10;
     circuits *circuit;
     while (choix>0){
+        system("clear");
         cout << "Choisissez un type de circuit : \n" << endl;
         cout << "1. Type A" << endl;
         cout << "2. Type B" << endl;
+        cout << "3. Type C" << endl;
+        cout << "4. Type D" << endl;
         cout << "0. Quitter" << endl;
         cin>>choix;
     
     switch (choix)
     {
+        float R;
+        float C;
+        float L;
+        
     case 1 :
-        cout << "valeur R1"<<endl;
-        cin>> R1;
+        cout << "valeur R"<<endl;
+        cin>> R;
         cout << "valeur C"<<endl;
         cin>> C;
-        circuit = new circuit_A(s,R1,C);
+        circuit = new circuit_A(s,R,C);
         break;
     case 2 :
+        float R1;
+        float R2;
+        float VBE;
         cout << "valeur R1"<<endl;
         cin>> R1;
         cout << "valeur R2"<<endl;
@@ -108,8 +94,27 @@ int main(){
         cin>> VBE;
         circuit = new circuit_B(s, R1, R2, C);
         break;
-    default : 
+    case 3 :
+        cout << "valeur R"<<endl;
+        cin>> R;
+        cout << "valeur C"<<endl;
+        cin>> C;
+        cout << "valeur L"<<endl;
+        cin>> L;
+        circuit = new circuit_C(s, R, C, L);
         break;
+    case 4 :
+        cout << "valeur R"<<endl;
+        cin>> R;
+        cout << "valeur C"<<endl;
+        cin>> C;
+        cout << "valeur L"<<endl;
+        cin>> L;
+        circuit = new circuit_D(s, R, C, L);
+        break;
+    default : 
+        return 0;
+        
     }
     }
     int npas = 10000;
@@ -117,5 +122,6 @@ int main(){
     circuit->resolution(npas, tfin);
        
     delete(s);
+    delete(circuit);
     return 0;
 }
