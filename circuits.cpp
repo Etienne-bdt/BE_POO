@@ -94,11 +94,40 @@ sec_ordre::sec_ordre(){
     C = Cond;
 };
 
+void sec_ordre::solver_select(){
+    int choix;
+    solver = "";
+    while(solver == ""){
+    system("clear");
+    cout << "Veuillez choisir un solver : \n" << endl;
+    cout << "1. Euler explicite" << endl;
+    cout << "2. Heun" << endl;
+    cout << "3. Runge-Kutta 4" << endl;
+    cin>>choix;
+    switch (choix)
+    {
+    case 1:
+        solver = "Euler explicite";
+        break;
+    case 2:
+        solver = "Heun";
+        break;
+    case 3:
+        solver = "Runge-Kutta 4";
+        break;
+    default:
+        break;
+    }
+    }
+};
+
 circuit_C::circuit_C(source *source,float res, float cap, float bob){
     s= source;
     R = res;
     L = bob;
     C = cap;
+    solver_select();
+    
 };
 
 float circuit_C::F(float t, float vs, float vsp){
@@ -124,6 +153,7 @@ circuit_D::circuit_D(source *source,float res, float cap, float bob){
     R = res;
     L = bob;
     C = cap;
+    solver_select();
 };
 
 float circuit_D::F(float t, float vs, float vsp,float h){

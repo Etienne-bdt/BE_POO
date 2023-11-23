@@ -2,6 +2,7 @@
 #include <string>
 #include <stdio.h>
 #include <math.h>
+using namespace std;
 
 
 class circuits {
@@ -44,8 +45,10 @@ class sec_ordre : public circuits{
         float R;
         float C;
         float L;
+        string solver;
     public:
         sec_ordre();
+        void solver_select();
         
 };
 

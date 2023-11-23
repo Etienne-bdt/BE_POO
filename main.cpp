@@ -112,15 +112,20 @@ int main(){
         cin>> L;
         circuit = new circuit_D(s, R, C, L);
         break;
-    default : 
+    case 0 : 
         return 0;
-        
+
+    default :
+        choix = 10;
+        break;    
     }
+    choix += -4;
+
     }
     int npas = 10000;
     float tfin = 15;
     circuit->resolution(npas, tfin);
-       
+    cout<<"Simulation terminee"<<endl;
     delete(s);
     delete(circuit);
     return 0;
