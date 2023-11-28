@@ -96,8 +96,8 @@ sec_ordre::sec_ordre(){
 
 void sec_ordre::solver_select(){
     int choix;
-    solver = "";
-    while(solver == ""){
+    solver = 0;
+    while(solver == 0){
     system("clear");
     cout << "Veuillez choisir un solver : \n" << endl;
     cout << "1. Euler explicite" << endl;
@@ -107,13 +107,16 @@ void sec_ordre::solver_select(){
     switch (choix)
     {
     case 1:
-        solver = "Euler explicite";
+        //solver Euler explicite
+        solver = 1;
         break;
     case 2:
-        solver = "Heun";
+        //solver Heun
+        solver = 2;
         break;
     case 3:
-        solver = "Runge-Kutta 4";
+        //solver Runge-Kutta 4
+        solver = 3;
         break;
     default:
         break;
@@ -121,7 +124,7 @@ void sec_ordre::solver_select(){
     }
 };
 
-circuit_C::circuit_C(source *source,float res, float cap, float bob){
+circuit_C::circuit_C(source *source,float res, double cap, double bob){
     s= source;
     R = res;
     L = bob;
@@ -130,25 +133,43 @@ circuit_C::circuit_C(source *source,float res, float cap, float bob){
     
 };
 
-float circuit_C::F(float t, float vs, float vsp){
-    return -(R/L)*vsp + ((vs-s->ve(t))/(L*C));
+double circuit_C::F(double t, double vs, double vsp){
+    return -(R/L)*vsp + ((s->ve(t)-vs)/(L*C));
 };
 
 void circuit_C::resolution(int npas, float tfin){
-    float t,U,Uf,V,Vf = 0;
-    float h = tfin/float(npas);
+    double t,U,Uf,V,Vf,Uf1,Uf2 = 0;
+    double h = tfin/double(npas);
     FILE * fich;
     fich=fopen("vs","wt");
-    fprintf(fich,"%f %f %f\n",t,s->ve(t),U);
-    for (t; t < tfin; t+=h)
-    {
+    U=0;
+    V=0;
+    fprintf(fich,"%.15f %.15f %.15f\n",t,s->ve(t),U);
+    for(double t=0;t<tfin;t+=h){
         Vf = h*F(t,U,V)+V;
-        Uf = h*V+U;   
+        switch (solver)
+        {
+        case 1:
+            Uf = h*V+U;   
+            break;
+        case 2:
+            Uf = U+ (h/2)*(V+Vf);
+            break;
+        case 3:
+            float Vf2,Vf3 = 0;
+            Vf2 = h*F(t+h,U+h*V,Vf)+Vf;
+            Vf3 = h*F(t+2*h,U+2*h*V,Vf2)+Vf2;
+            Uf = U+ (h/6)*(V+2*Vf+2*Vf2+Vf3);  
+            break;
+        }
+        V = Vf;
+        U = Uf;
+        fprintf(fich,"%.15f %.15f %.15f\n",t,s->ve(t),U);
     }
     fclose(fich);
 };
 
-circuit_D::circuit_D(source *source,float res, float cap, float bob){
+circuit_D::circuit_D(source *source,float res, double cap, double bob){
     s = source;
     R = res;
     L = bob;
@@ -156,21 +177,39 @@ circuit_D::circuit_D(source *source,float res, float cap, float bob){
     solver_select();
 };
 
-float circuit_D::F(float t, float vs, float vsp,float h){
-    float vep = (s->ve(t+h)-s->ve(t))/h;
+double circuit_D::F(double t, double vs, double vsp, double h){
+    double vep = (s->ve(t+h)-s->ve(t))/h;
     return -vs/(L*C) + (vep-vsp)/(R*C);
 };
 
 void circuit_D::resolution(int npas, float tfin){
-    float t,U,Uf,V,Vf = 0;
-    float h = tfin/float(npas);
+    double t,U,Uf,V,Vf = 0;
+    double h = tfin/double(npas);
     FILE * fich;
     fich=fopen("vs","wt");
-    fprintf(fich,"%f %f %f\n",t,s->ve(t),U);
-    for (t; t < tfin; t+=h)
-    {
+    U=0;
+    V=0;
+    fprintf(fich,"%.15f %.15f %.15f\n",t,s->ve(t),U);
+    for(double t=0;t<tfin;t+=h){
         Vf = h*F(t,U,V,h)+V;
-        Uf = h*V+U;
+        switch (solver)
+        {
+        case 1:
+            Uf = h*V+U;   
+            break;
+        case 2:
+            Uf = U+ (h/2)*(V+Vf);
+            break;
+        case 3:
+            float Vf2,Vf3 = 0;
+            Vf2 = h*F(t+h,U+h*V,Vf,h)+Vf;
+            Vf3 = h*F(t+2*h,U+2*h*V,Vf2,h)+Vf2;
+            Uf = U+ (h/6)*(V+2*Vf+2*Vf2+Vf3);  
+            break;
+        }
+        V = Vf;
+        U = Uf;
+        fprintf(fich,"%.15f %.15f %.15f\n",t,s->ve(t),U);
     }
     fclose(fich);
 };

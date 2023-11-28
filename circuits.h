@@ -43,9 +43,9 @@ class circuit_B : public prem_ordre{
 class sec_ordre : public circuits{
     protected: 
         float R;
-        float C;
-        float L;
-        string solver;
+        double C;
+        double L;
+        int solver;
     public:
         sec_ordre();
         void solver_select();
@@ -54,14 +54,14 @@ class sec_ordre : public circuits{
 
 class circuit_C : public sec_ordre{
     public : 
-        circuit_C(source *source, float res, float cap, float bob);
+        circuit_C(source *source, float res, double cap, double bob);
         void resolution(int npas, float tfin);
-        float F(float t, float vs, float vsp);
+        double F(double t, double vs, double vsp);
 };
 
 class circuit_D : public sec_ordre{
     public : 
-        circuit_D(source *source,float res, float cap, float bob);
+        circuit_D(source *source,float res, double cap, double bob);
         void resolution(int npas, float tfin);
-        float F(float t, float vs, float vsp, float h);
+        double F(double t, double vs, double vsp, double h);
 };

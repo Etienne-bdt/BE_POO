@@ -25,7 +25,7 @@ int main(){
         switch (choix)
         {
         case 1:
-            s = new source_sin(100, 2 ,0);
+            s = new source_sin(1, 2 ,0);
             break;
         
         case 2:
@@ -41,7 +41,7 @@ int main(){
             break;
 
         case 5:
-            s = new echelon(1, 1);
+            s = new echelon(1, 0);
             break;
         
         case 0:
@@ -122,8 +122,8 @@ int main(){
     choix += -4;
 
     }
-    int npas = 10000;
-    float tfin = 15;
+    double npas = 1000000;
+    double tfin = 5e-7;
     circuit->resolution(npas, tfin);
     cout<<"Simulation terminee"<<endl;
     delete(s);
