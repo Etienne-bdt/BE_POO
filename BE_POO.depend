@@ -1,0 +1,47 @@
+# depslib dependency file v1.0
+1701871157 source:e:\enseeiht\2a\poo\be\be_poo\trace.cpp
+	<stdio.h>
+	<math.h>
+	"source.h"
+
+1702058178 e:\enseeiht\2a\poo\be\be_poo\source.h
+	<iostream>
+	<string>
+	<stdio.h>
+	<math.h>
+
+1701901458 source:e:\enseeiht\2a\poo\be\be_poo\circuits.cpp
+	<stdio.h>
+	<math.h>
+	<iostream>
+	<string>
+	"source.h"
+	"circuits.h"
+
+1701871157 e:\enseeiht\2a\poo\be\be_poo\circuits.h
+	<iostream>
+	<string>
+	<stdio.h>
+	<math.h>
+
+1702058352 source:e:\enseeiht\2a\poo\be\be_poo\source.cpp
+	<stdio.h>
+	<math.h>
+	<iostream>
+	<string>
+	"source.h"
+
+1702058190 source:e:\enseeiht\2a\poo\be\be_poo\main.cpp
+	<stdio.h>
+	<math.h>
+	<iostream>
+	<string>
+	"trace.h"
+	"source.h"
+	"circuits.h"
+
+1701871157 e:\enseeiht\2a\poo\be\be_poo\trace.h
+	<stdio.h>
+	<math.h>
+	"source.h"
+

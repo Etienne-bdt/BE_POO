@@ -13,49 +13,58 @@ source::source(){
     return;
 };
 
-source_sin::source_sin(float f, float a, float p){
-    amplitude = a;
-    phase = p;
-    frequence = f;
+source_sin::source_sin(){
+    return;
 };
 
 source_periodique::source_periodique(){
-    amplitude =0;
-    frequence = 0;
-    phase = 0;
+    float a,f,p;
+    cout<<"Veuillez saisir une amplitude"<<endl;
+    cin>>a;
+    cout<<"Veuillez saisir une fréquence"<<endl;
+    cin>>f;
+    cout<<"Veuillez saisir une phase"<<endl;
+    cin>>p;
+    amplitude =a;
+    frequence = f;
+    phase = p;
 };
 
-source_periodique::source_periodique(float f, float a, float p){
-    amplitude = a;
-    phase=p;
-    frequence=f;
-};
 
 source_aperiodique::source_aperiodique(){
     return;
 };
 
-source_rectangulaire::source_rectangulaire(float a, float p, float d){
+source_rectangulaire::source_rectangulaire(){
+    float a,p,d;
+    cout<<"Veuillez saisir une amplitude"<<endl;
+    cin>>a;
+    cout<<"Veuillez saisir une phase"<<endl;
+    cin>>p;
+    cout<<"Veuillez saisir une durée"<<endl;
+    cin>>d;
     amplitude = a;
     phase = p;
     duree = d;
 };
 
-source_triangulaire::source_triangulaire(float a,float p, float f){
-    amplitude = a;
-    phase = p;
-    frequence = f;
+source_triangulaire::source_triangulaire(){return;
 };
 
-echelon::echelon(float a, float p){
+echelon::echelon(){
+    float a,p;
+    cout<<"Veuillez saisir une amplitude"<<endl;
+    cin>>a;
+    cout<<"Veuillez saisir une phase"<<endl;
+    cin>>p;
     amplitude =a;
     phase = p;
 };
 
-creneau::creneau(float a, float p, float f, float rc){
-    amplitude = a;
-    frequence = f;
-    phase = p;
+creneau::creneau(){
+    float rc;
+    cout<<"Veuillez saisir le rapport cyclique"<<endl;
+    cin>>rc;
     rapport_cyclique = rc;
 };
 float source_sin::ve(float t){

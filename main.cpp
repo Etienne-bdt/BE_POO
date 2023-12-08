@@ -25,34 +25,35 @@ int main(){
         switch (choix)
         {
         case 1:
-            s = new source_sin(1, 2 ,0);
+            s = new source_sin();
             break;
-        
+
         case 2:
-            s = new source_triangulaire(1, 1 , 1);
+            s = new source_triangulaire();
             break;
 
         case 3:
-            s = new creneau(1, 1, 1,1);
+            s = new creneau();
             break;
 
         case 4:
-            s = new source_rectangulaire(1, 1, 3);
+            s = new source_rectangulaire();
             break;
 
         case 5:
-            s = new echelon(1, 0);
+            s = new echelon();
             break;
-        
+
         case 0:
             delete(s);
             return 0;
 
         default:
+            choix=10;
             cout << "Choix invalide" << endl;
             break;
         }
-        choix = -1;
+        choix += -5;
     }
 
     choix =10;
@@ -66,13 +67,13 @@ int main(){
         cout << "4. Type D" << endl;
         cout << "0. Quitter" << endl;
         cin>>choix;
-    
+
     switch (choix)
     {
         float R;
         float C;
         float L;
-        
+
     case 1 :
         cout << "valeur R"<<endl;
         cin>> R;
@@ -90,8 +91,6 @@ int main(){
         cin>> R2;
         cout << "valeur C"<<endl;
         cin>> C;
-        cout << "valeur VBE"<<endl;
-        cin>> VBE;
         circuit = new circuit_B(s, R1, R2, C);
         break;
     case 3 :
@@ -112,12 +111,12 @@ int main(){
         cin>> L;
         circuit = new circuit_D(s, R, C, L);
         break;
-    case 0 : 
+    case 0 :
         return 0;
 
     default :
         choix = 10;
-        break;    
+        break;
     }
     choix += -4;
 
@@ -130,3 +129,5 @@ int main(){
     delete(circuit);
     return 0;
 }
+//Ce code ne change pas par rapport à la dernière partie.
+

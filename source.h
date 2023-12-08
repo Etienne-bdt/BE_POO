@@ -16,7 +16,6 @@ public:
 class source_periodique: public source {
     public:
         source_periodique();
-        source_periodique(float f, float a, float p);
     protected:
         float frequence;
         float amplitude;
@@ -30,14 +29,14 @@ public:
 
 class source_sin: public source_periodique {
 public:
-    source_sin(float f,float a, float p);
+    source_sin();
     float ve(float t);
 
 };
 
 class source_triangulaire : public source_periodique{
 public:
-    source_triangulaire(float a, float p, float f);
+    source_triangulaire();
     float ve(float t);
 private:
     float amplitude;
@@ -47,7 +46,7 @@ private:
 
 class creneau : public source_periodique{
 public:
-    creneau(float a, float p, float f, float rc);
+    creneau();
     float ve(float t);
 private:
     float amplitude;
@@ -58,7 +57,7 @@ private:
 
 class source_rectangulaire: public source_aperiodique{
 public:
-    source_rectangulaire(float a, float p, float d);
+    source_rectangulaire();
     float ve(float t);
 private:
     float amplitude;
@@ -68,7 +67,7 @@ private:
 
 class echelon: public source_aperiodique{
 public:
-    echelon(float a, float p);
+    echelon();
     float ve(float t);
 private:
     float amplitude;

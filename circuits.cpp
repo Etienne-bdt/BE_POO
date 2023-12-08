@@ -6,6 +6,8 @@
 #include "circuits.h"
 using namespace std;
 
+//La majorite du code ne change pas ici sauf la fin du fichier
+
 circuits::circuits(){
     source *source;
     s = source;
@@ -129,8 +131,9 @@ circuit_C::circuit_C(source *source,float res, double cap, double bob){
     R = res;
     L = bob;
     C = cap;
+    //Definition des sources et composants ET choix du solver
     solver_select();
-    
+
 };
 
 double circuit_C::F(double t, double vs, double vsp){
@@ -147,10 +150,11 @@ void circuit_C::resolution(int npas, float tfin){
     fprintf(fich,"%.15f %.15f %.15f\n",t,s->ve(t),U);
     for(double t=0;t<tfin;t+=h){
         Vf = h*F(t,U,V)+V;
+        //On utilise l'equation differentielle pour calculer Vf puis, en fonction du solveur (switch) on pondere la valeur de Vf que l'on utilise dans Uf
         switch (solver)
         {
         case 1:
-            Uf = h*V+U;   
+            Uf = h*V+U;
             break;
         case 2:
             Uf = U+ (h/2)*(V+Vf);
@@ -159,7 +163,7 @@ void circuit_C::resolution(int npas, float tfin){
             float Vf2,Vf3 = 0;
             Vf2 = h*F(t+h,U+h*V,Vf)+Vf;
             Vf3 = h*F(t+2*h,U+2*h*V,Vf2)+Vf2;
-            Uf = U+ (h/6)*(V+2*Vf+2*Vf2+Vf3);  
+            Uf = U+ (h/6)*(V+2*Vf+2*Vf2+Vf3);
             break;
         }
         V = Vf;
@@ -189,13 +193,15 @@ void circuit_D::resolution(int npas, float tfin){
     fich=fopen("vs","wt");
     U=0;
     V=0;
+    //on affiche des valeurs tres faibles d'ou la precision a 15 decimales
     fprintf(fich,"%.15f %.15f %.15f\n",t,s->ve(t),U);
     for(double t=0;t<tfin;t+=h){
         Vf = h*F(t,U,V,h)+V;
+        //On utilise l'equation differentielle pour calculer Vf puis, en fonction du solveur (switch) on pondere la valeur de Vf que l'on utilise dans Uf
         switch (solver)
         {
         case 1:
-            Uf = h*V+U;   
+            Uf = h*V+U;
             break;
         case 2:
             Uf = U+ (h/2)*(V+Vf);
@@ -204,7 +210,7 @@ void circuit_D::resolution(int npas, float tfin){
             float Vf2,Vf3 = 0;
             Vf2 = h*F(t+h,U+h*V,Vf,h)+Vf;
             Vf3 = h*F(t+2*h,U+2*h*V,Vf2,h)+Vf2;
-            Uf = U+ (h/6)*(V+2*Vf+2*Vf2+Vf3);  
+            Uf = U+ (h/6)*(V+2*Vf+2*Vf2+Vf3);
             break;
         }
         V = Vf;
