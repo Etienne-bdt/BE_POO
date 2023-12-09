@@ -55,7 +55,7 @@ int main(){
         }
         choix += -5;
     }
-
+    trace(s);
     choix =10;
     circuits *circuit;
     while (choix>0){
@@ -70,9 +70,9 @@ int main(){
 
     switch (choix)
     {
-        float R;
-        float C;
-        float L;
+        double R;
+        double C;
+        double L;
 
     case 1 :
         cout << "valeur R"<<endl;
@@ -82,9 +82,9 @@ int main(){
         circuit = new circuit_A(s,R,C);
         break;
     case 2 :
-        float R1;
-        float R2;
-        float VBE;
+        double R1;
+        double R2;
+        double VBE;
         cout << "valeur R1"<<endl;
         cin>> R1;
         cout << "valeur R2"<<endl;
@@ -121,8 +121,11 @@ int main(){
     choix += -4;
 
     }
-    double npas = 1000000;
-    double tfin = 5e-7;
+    double npas,tfin;
+    cout<<"Veuillez choisir un temps final"<<endl;
+    cin>>tfin;
+    cout<<"Veuillez choisir un nombre de points"<<endl;
+    cin>>npas;
     circuit->resolution(npas, tfin);
     cout<<"Simulation terminee"<<endl;
     delete(s);

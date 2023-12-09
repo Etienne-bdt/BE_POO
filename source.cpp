@@ -5,7 +5,7 @@
 #include "source.h"
 using namespace std;
 
-float source::ve(float t){
+double source::ve(double t){
     return 0;
 };
 
@@ -14,20 +14,14 @@ source::source(){
 };
 
 source_sin::source_sin(){
-    return;
+    double a;
+    cout<<"Veuillez saisir une amplitude"<<endl;
+    cin>>a;
+    amplitude = a;
 };
 
 source_periodique::source_periodique(){
-    float a,f,p;
-    cout<<"Veuillez saisir une amplitude"<<endl;
-    cin>>a;
-    cout<<"Veuillez saisir une fréquence"<<endl;
-    cin>>f;
-    cout<<"Veuillez saisir une phase"<<endl;
-    cin>>p;
-    amplitude =a;
-    frequence = f;
-    phase = p;
+    return;
 };
 
 
@@ -36,7 +30,7 @@ source_aperiodique::source_aperiodique(){
 };
 
 source_rectangulaire::source_rectangulaire(){
-    float a,p,d;
+    double a,p,d;
     cout<<"Veuillez saisir une amplitude"<<endl;
     cin>>a;
     cout<<"Veuillez saisir une phase"<<endl;
@@ -48,11 +42,21 @@ source_rectangulaire::source_rectangulaire(){
     duree = d;
 };
 
-source_triangulaire::source_triangulaire(){return;
+source_triangulaire::source_triangulaire(){
+    double a,f,p;
+    cout<<"Veuillez saisir une amplitude"<<endl;
+    cin>>a;
+    cout<<"Veuillez saisir une fréquence"<<endl;
+    cin>>f;
+    cout<<"Veuillez saisir une phase"<<endl;
+    cin>>p;
+    frequence = f;
+    phase = p;
+    amplitude = a;
 };
 
 echelon::echelon(){
-    float a,p;
+    double a,p;
     cout<<"Veuillez saisir une amplitude"<<endl;
     cin>>a;
     cout<<"Veuillez saisir une phase"<<endl;
@@ -62,16 +66,26 @@ echelon::echelon(){
 };
 
 creneau::creneau(){
-    float rc;
+    double a,f,p,rc;
+    cout<<"Veuillez saisir une amplitude"<<endl;
+    cin>>a;
+    cout<<"Veuillez saisir une fréquence"<<endl;
+    cin>>f;
+    cout<<"Veuillez saisir une phase"<<endl;
+    cin>>p;
     cout<<"Veuillez saisir le rapport cyclique"<<endl;
     cin>>rc;
+    amplitude =a;
+    frequence = f;
+    phase = p;
     rapport_cyclique = rc;
+
 };
-float source_sin::ve(float t){
+double source_sin::ve(double t){
     return amplitude*sin(2*M_PI*t*frequence + phase);
 };
 
-float source_rectangulaire::ve(float t){
+double source_rectangulaire::ve(double t){
     if(t>phase && t < phase+duree){
         return amplitude;
     }
@@ -80,7 +94,7 @@ float source_rectangulaire::ve(float t){
     }
 };
 
-float echelon::ve(float t){
+double echelon::ve(double t){
     if(t>phase){
         return amplitude;
     }
@@ -89,10 +103,9 @@ float echelon::ve(float t){
     }
 };
 
-float creneau::ve(float t){
-    float t1 = phase + rapport_cyclique/frequence;
-    float tr = fmod(t,1/frequence);
-
+double creneau::ve(double t){
+    double t1 = phase + rapport_cyclique/frequence;
+    double tr = fmod(t,1/frequence);
     if(tr>phase && tr<t1){
         return amplitude;
     }
@@ -101,11 +114,11 @@ float creneau::ve(float t){
     }
 }
 
-float triangle(float t, float amplitude, float frequence){
-    float t1 = 1/(2*frequence);
-    float t2 = 1/frequence;
-    float tr = fmod(t,1/frequence);
-    float coeff_dir = 2*amplitude/(1/frequence);
+double triangle(double t, double amplitude, double frequence){
+    double t1 = 1/(2*frequence);
+    double t2 = 1/frequence;
+    double tr = fmod(t,1/frequence);
+    double coeff_dir = 2*amplitude/(1/frequence);
     if(tr>0 && tr<t1){
         return coeff_dir*(tr);
     }
@@ -117,8 +130,8 @@ float triangle(float t, float amplitude, float frequence){
     };
 }
 
-float source_triangulaire::ve(float t){
-    float pt = fmod(phase/(frequence*2*M_PI),1/frequence);
+double source_triangulaire::ve(double t){
+    double pt = fmod(phase/(frequence*2*M_PI),1/frequence);
     if(t>=0){
         return triangle(t+pt,amplitude,frequence);
     }
